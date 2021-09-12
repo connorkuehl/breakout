@@ -11,7 +11,7 @@ static void collision_system(struct breakout *breakout, float dt);
 void breakout_reset(struct breakout *breakout)
 {
     struct paddle *player = &breakout->player;
-    player->w = 128;
+    player->w = 96;
     player->h = 16;
     player->x = (BREAKOUT_GAME_WIDTH / 2) - (player->w / 2);
     player->y = BREAKOUT_GAME_HEIGHT - (player->h + 16);
