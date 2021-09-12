@@ -5,6 +5,8 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
+#include "breakout.h"
+
 double const S_PER_FRAME = 1.0 / 60.0;
 
 int main(int argc, char *argv[])
@@ -23,11 +25,11 @@ int main(int argc, char *argv[])
     }
 
     SDL_Window *window = SDL_CreateWindow(
-            "breakout",
+            BREAKOUT_GAME_TITLE,
             SDL_WINDOWPOS_CENTERED,
             SDL_WINDOWPOS_CENTERED,
-            640,
-            480,
+            BREAKOUT_GAME_WIDTH,
+            BREAKOUT_GAME_HEIGHT,
             SDL_WINDOW_SHOWN
     );
     if (!window) {
