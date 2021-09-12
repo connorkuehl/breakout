@@ -69,8 +69,8 @@ static void ball_and_player(struct paddle *player, struct ball *ball, float dt)
     SDL_Rect b = {
         .w = ball->w,
         .h = ball->h,
-        .x = ball->x + (ball->dx * 3.f),
-        .y = ball->y + (ball->dy * 3.f),
+        .x = ball->x + (ball->dx * 3.f * dt),
+        .y = ball->y + (ball->dy * 3.f * dt),
     };
 
     SDL_Rect p = {

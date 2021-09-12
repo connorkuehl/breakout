@@ -6,7 +6,7 @@ float const BALL_SPEED = 200.f;
 
 void ball_update(struct ball *ball, float dt)
 {
-    float epsilon = 3.f;
+    float epsilon = 3.f * dt;
 
     if (ball->x - epsilon <= 0.f || ball->x + ball->w + epsilon >= BREAKOUT_GAME_WIDTH) {
         ball->dx *= -1;
