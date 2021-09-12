@@ -14,7 +14,7 @@ void ball_spawn(struct ball *ball)
         ball->x += margins;
     }
 
-    ball->y = BREAKOUT_GAME_HEIGHT * 0.25f;
+    ball->y = BREAKOUT_GAME_HEIGHT * 0.30f;
 
     ball->dy = 1;
     ball->dx = rand() % 2 == 0 ? 1 : -1;
