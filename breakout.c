@@ -20,8 +20,8 @@ void breakout_reset(struct breakout *breakout)
     srand(time(0));
 
     struct ball *ball = &breakout->ball;
-    ball->w = 16;
-    ball->h = 16;
+    ball->w = 8;
+    ball->h = 8;
     ball_spawn(ball);
 }
 
