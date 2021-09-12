@@ -12,8 +12,8 @@ enum paddle_direction {
 };
 
 struct paddle {
-    int x;
-    int y;
+    float x;
+    float y;
     int w;
     int h;
     enum paddle_direction direction;
