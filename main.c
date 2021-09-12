@@ -58,12 +58,16 @@ int main(int argc, char *argv[])
     double accumulator = 0.0;
 
     while (!should_quit) {
-        // interact()
         SDL_Event e;
         while (SDL_PollEvent(&e)) {
             if (e.type == SDL_QUIT) {
                 should_quit = true;
             }
+
+            if (e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_ESCAPE) {
+                should_quit = true;
+            }
+
         }
 
         double now = (double)SDL_GetPerformanceCounter();
