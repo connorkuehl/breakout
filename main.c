@@ -54,6 +54,9 @@ int main(int argc, char *argv[])
         goto free_renderer;
     }
 
+    struct breakout game = {};
+    breakout_reset(&game);
+
     bool should_quit = false;
 
     double last_time = (double)SDL_GetPerformanceCounter();
@@ -70,6 +73,7 @@ int main(int argc, char *argv[])
                 should_quit = true;
             }
 
+            breakout_handle_input(&game, e);
         }
 
         double now = (double)SDL_GetPerformanceCounter();
@@ -79,13 +83,14 @@ int main(int argc, char *argv[])
         accumulator += frame_time;
 
         while (accumulator >= S_PER_FRAME) {
-            // update()
+            breakout_update(&game, S_PER_FRAME);
             accumulator -= S_PER_FRAME;
         }
 
         SDL_RenderClear(renderer);
 
-        // render()
+        breakout_draw(&game, renderer);
+
         char fps[32] = {};
         sprintf(fps, "%.2f", 1.0 / frame_time);
         SDL_Surface *fps_surface = TTF_RenderText_Solid(font, fps, ((SDL_Color) { 0xff, 0xff, 0xff, 0xff }));
