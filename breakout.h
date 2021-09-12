@@ -4,11 +4,14 @@
 #include <SDL_events.h>
 #include <SDL_render.h>
 
+#include "paddle.h"
+
 extern char *const BREAKOUT_GAME_TITLE;
 extern int const BREAKOUT_GAME_WIDTH;
 extern int const BREAKOUT_GAME_HEIGHT;
 
 struct breakout {
+    struct paddle player;
 };
 
 void breakout_reset(struct breakout *breakout);
