@@ -4,6 +4,8 @@ char *const BREAKOUT_GAME_TITLE = "breakout";
 int const BREAKOUT_GAME_WIDTH   = 640;
 int const BREAKOUT_GAME_HEIGHT  = 480;
 
+static void collision_system(struct breakout *breakout, float dt);
+
 void breakout_reset(struct breakout *breakout)
 {
     struct paddle *player = &breakout->player;
@@ -18,7 +20,7 @@ void breakout_reset(struct breakout *breakout)
     ball->h = 16;
     ball->x = (BREAKOUT_GAME_WIDTH / 2) - (ball->w / 2);
     ball->y = BREAKOUT_GAME_HEIGHT - ball->h - 64;
-    ball->dx = -1;
+    ball->dy = -1;
 }
 
 void breakout_handle_input(struct breakout *breakout, SDL_Event event)
@@ -49,6 +51,8 @@ void breakout_update(struct breakout *breakout, float dt)
 {
     paddle_update(&breakout->player, dt);
     ball_update(&breakout->ball, dt);
+
+    collision_system(breakout, dt);
 }
 
 void breakout_draw(struct breakout *breakout, SDL_Renderer *renderer)
@@ -58,4 +62,31 @@ void breakout_draw(struct breakout *breakout, SDL_Renderer *renderer)
 
     paddle_draw(&breakout->player, renderer);
     ball_draw(&breakout->ball, renderer);
+}
+
+static void ball_and_player(struct paddle *player, struct ball *ball, float dt)
+{
+    SDL_Rect b = {
+        .w = ball->w,
+        .h = ball->h,
+        .x = ball->x + (ball->dx * 3.f),
+        .y = ball->y + (ball->dy * 3.f),
+    };
+
+    SDL_Rect p = {
+        .w = player->w,
+        .h = player->h,
+        .x = player->x,
+        .y = player->y,
+    };
+
+    if (SDL_HasIntersection(&b, &p)) {
+        ball->dx *= -1;
+        ball->dy *= -1;
+    }
+}
+
+static void collision_system(struct breakout *breakout, float dt)
+{
+    ball_and_player(&breakout->player, &breakout->ball, dt);
 }

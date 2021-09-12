@@ -16,7 +16,7 @@ void ball_update(struct ball *ball, float dt)
     }
 
     ball->x += (BALL_SPEED * ball->dx * dt);
-    //ball->y += (BALL_SPEED * ball->dy * dt);
+    ball->y += (BALL_SPEED * ball->dy * dt);
 }
 
 void ball_draw(struct ball *ball, SDL_Renderer *renderer)
