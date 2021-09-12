@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 
     SDL_SetRenderDrawColor(renderer, 0x9, 0x1f, 0x92, 0xff);
 
-    TTF_Font *font = TTF_OpenFont("./res/font/press_start_2p.ttf", 32);
+    TTF_Font *font = TTF_OpenFont("./res/font/press_start_2p.ttf", 16);
     if (!font) {
         fprintf(stderr, "TTF_OpenFont: %s\n", TTF_GetError());
         goto free_renderer;
