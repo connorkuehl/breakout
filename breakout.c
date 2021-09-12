@@ -12,6 +12,13 @@ void breakout_reset(struct breakout *breakout)
     player->x = (BREAKOUT_GAME_WIDTH / 2) - (player->w / 2);
     player->y = BREAKOUT_GAME_HEIGHT - (player->h + 16);
     player->direction = PADDLE_DIRECTION_NONE;
+
+    struct ball *ball = &breakout->ball;
+    ball->w = 16;
+    ball->h = 16;
+    ball->x = (BREAKOUT_GAME_WIDTH / 2) - (ball->w / 2);
+    ball->y = BREAKOUT_GAME_HEIGHT - ball->h - 64;
+    ball->dx = -1;
 }
 
 void breakout_handle_input(struct breakout *breakout, SDL_Event event)
@@ -41,6 +48,7 @@ void breakout_handle_input(struct breakout *breakout, SDL_Event event)
 void breakout_update(struct breakout *breakout, float dt)
 {
     paddle_update(&breakout->player, dt);
+    ball_update(&breakout->ball, dt);
 }
 
 void breakout_draw(struct breakout *breakout, SDL_Renderer *renderer)
@@ -49,4 +57,5 @@ void breakout_draw(struct breakout *breakout, SDL_Renderer *renderer)
     SDL_RenderClear(renderer);
 
     paddle_draw(&breakout->player, renderer);
+    ball_draw(&breakout->ball, renderer);
 }
