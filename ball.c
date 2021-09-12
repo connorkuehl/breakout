@@ -17,7 +17,7 @@ void ball_spawn(struct ball *ball)
     ball->y = BREAKOUT_GAME_HEIGHT * 0.5f;
 
     ball->dy = 1;
-    ball->dx = rand() % 2 == 0;
+    ball->dx = rand() % 2 == 0 ? 1 : -1;
 }
 
 void ball_update(struct ball *ball, float dt)
