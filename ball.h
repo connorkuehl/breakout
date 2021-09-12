@@ -14,6 +14,7 @@ struct ball {
     int h;
 };
 
+void ball_spawn(struct ball *ball);
 void ball_update(struct ball *ball, float dt);
 void ball_draw(struct ball *ball, SDL_Renderer *renderer);
 

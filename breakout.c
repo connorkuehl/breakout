@@ -1,3 +1,5 @@
+#include <time.h>
+
 #include "breakout.h"
 
 char *const BREAKOUT_GAME_TITLE = "breakout";
@@ -15,12 +17,12 @@ void breakout_reset(struct breakout *breakout)
     player->y = BREAKOUT_GAME_HEIGHT - (player->h + 16);
     player->direction = PADDLE_DIRECTION_NONE;
 
+    srand(time(0));
+
     struct ball *ball = &breakout->ball;
     ball->w = 16;
     ball->h = 16;
-    ball->x = (BREAKOUT_GAME_WIDTH / 2) - (ball->w / 2);
-    ball->y = BREAKOUT_GAME_HEIGHT - ball->h - 64;
-    ball->dy = -1;
+    ball_spawn(ball);
 }
 
 void breakout_handle_input(struct breakout *breakout, SDL_Event event)

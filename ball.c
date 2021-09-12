@@ -4,6 +4,22 @@
 
 float const BALL_SPEED = 200.f;
 
+void ball_spawn(struct ball *ball)
+{
+    float margins = BREAKOUT_GAME_WIDTH * 0.13f;
+    int horizontal_spawn_space = BREAKOUT_GAME_WIDTH - margins;
+
+    ball->x = rand() % horizontal_spawn_space;
+    if (ball->x < margins) {
+        ball->x += margins;
+    }
+
+    ball->y = BREAKOUT_GAME_HEIGHT * 0.5f;
+
+    ball->dy = 1;
+    ball->dx = rand() % 2 == 0;
+}
+
 void ball_update(struct ball *ball, float dt)
 {
     float epsilon = 3.f * dt;
