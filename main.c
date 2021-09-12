@@ -94,6 +94,7 @@ int main(int argc, char *argv[])
             fprintf(stderr, "SDL_CreateTextureFromSurface: %s\n", SDL_GetError());
             goto free_renderer;
         }
+        SDL_FreeSurface(fps_surface);
 
         SDL_Rect font_rect = {
             .w = fps_surface->w,
