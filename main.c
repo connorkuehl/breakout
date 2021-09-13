@@ -105,7 +105,6 @@ int main(int argc, char *argv[])
             fprintf(stderr, "SDL_CreateTextureFromSurface: %s\n", SDL_GetError());
             goto free_renderer;
         }
-        SDL_FreeSurface(fps_surface);
 
         SDL_Rect font_rect = {
             .w = fps_surface->w,
@@ -113,6 +112,7 @@ int main(int argc, char *argv[])
             .x = 8,
             .y = 8,
         };
+        SDL_FreeSurface(fps_surface);
 
         SDL_RenderCopy(renderer, fps_texture, NULL, &font_rect);
         SDL_DestroyTexture(fps_texture);
