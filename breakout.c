@@ -52,7 +52,7 @@ void breakout_reset(struct breakout *breakout)
                 .h = BRICK_HEIGHT,
                 .x = x,
                 .y = y,
-                .health = 1,
+                .health = BRICK_HEALTH,
             };
             x_gap = BRICK_GAP;
         }

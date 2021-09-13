@@ -6,7 +6,7 @@
 #define BRICK_WIDTH  46
 #define BRICK_HEIGHT 12
 #define BRICK_GAP    5
-#define BRICK_HEALTH 1
+#define BRICK_HEALTH 3
 
 struct brick {
     float x;
