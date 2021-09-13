@@ -1,13 +1,9 @@
 #include "brick.h"
 
-static SDL_Color const GREEN = (const SDL_Color) { .a = 0xff, .g = 0xff };
-static SDL_Color const YELLOW = (const SDL_Color) { .a = 0xff, .r =0xff, .g = 0xff };
-static SDL_Color const RED = (const SDL_Color) { .a = 0xff, .r =0xff };
-
 static SDL_Color const health_colors[BRICK_HEALTH] = {
-    RED,
-    YELLOW,
-    GREEN,
+    { .a = 0xff, .r = 0xff },            /* 1 hp = red */
+    { .a = 0xff, .r = 0xff, .g = 0xff }, /* 2 hp = yellow */
+    { .a = 0xff, .g = 0xff },            /* 3 hp = green */
 };
 
 void brick_update(struct brick *brick, float dt)
