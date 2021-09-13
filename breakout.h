@@ -5,6 +5,7 @@
 #include <SDL_render.h>
 
 #include "ball.h"
+#include "brick.h"
 #include "paddle.h"
 
 extern char *const BREAKOUT_GAME_TITLE;
@@ -14,8 +15,11 @@ extern int const BREAKOUT_GAME_HEIGHT;
 struct breakout {
     struct paddle player;
     struct ball ball;
+    struct brick *bricks;
+    int n_bricks;
 };
 
+void breakout_cleanup(struct breakout *breakout);
 void breakout_reset(struct breakout *breakout);
 void breakout_handle_input(struct breakout *breakout, SDL_Event event);
 void breakout_update(struct breakout *breakout, float dt);

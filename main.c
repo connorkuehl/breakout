@@ -120,6 +120,7 @@ int main(int argc, char *argv[])
         SDL_RenderPresent(renderer);
     }
 
+    breakout_cleanup(&game);
 
 free_renderer:
     SDL_DestroyRenderer(renderer);
