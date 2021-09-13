@@ -141,6 +141,33 @@ void breakout_draw(struct breakout *breakout, SDL_Renderer *renderer)
     SDL_RenderCopy(renderer, lives_tex, NULL, &lives_rect);
     SDL_DestroyTexture(lives_tex);
 
+    char score[32] = {};
+    snprintf(score, sizeof(score), "score: %d", breakout->score);
+    SDL_Surface *score_surface = TTF_RenderText_Solid(breakout->assets.font, score, ((SDL_Color) { 0xff, 0xff, 0xff, 0xff }));
+    if (!score_surface) {
+        fprintf(stderr, "TTF_RenderText_Solid: %s\n", TTF_GetError());
+        goto done;
+    }
+
+    SDL_Texture *score_tex = SDL_CreateTextureFromSurface(renderer, score_surface);
+    if (!score_tex) {
+        SDL_FreeSurface(score_surface);
+        fprintf(stderr, "SDL_CreateTextureFromSurface: %s\n", TTF_GetError());
+        goto done;
+    }
+
+    SDL_Rect score_rect = {
+        .w = score_surface->w,
+        .h = score_surface->h,
+        .x = (BREAKOUT_GAME_WIDTH / 2) - (score_surface->w / 2),
+        .y = 5,
+    };
+    SDL_FreeSurface(score_surface);
+
+    SDL_RenderCopy(renderer, score_tex, NULL, &score_rect);
+    SDL_DestroyTexture(score_tex);
+
+
 done:
     return;
 }
@@ -203,6 +230,7 @@ static void ball_and_bricks(struct breakout *breakout, float dt)
             if (brick->health < 1) {
                 --breakout->n_bricks;
                 *brick = breakout->bricks[breakout->n_bricks];
+                breakout->score += POINTS_PER_BRICK;
             }
         }
     }
