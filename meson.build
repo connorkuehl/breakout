@@ -1,4 +1,4 @@
-project('breakout', 'c')
+project('breakout', 'c', default_options : ['c_std=c11'])
 
 sdl2 = dependency('sdl2')
 sdl2_ttf = dependency('sdl2_ttf')
