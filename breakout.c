@@ -12,6 +12,7 @@ static void collision_system(struct breakout *breakout, float dt);
 void breakout_reset(struct breakout *breakout)
 {
     breakout->lives = LIVES;
+    breakout->score = 0;
 
     struct paddle *player = &breakout->player;
     player->w = 96;
@@ -96,7 +97,7 @@ void breakout_update(struct breakout *breakout, float dt)
         --breakout->lives;
         ball_spawn(ball);
         if (breakout->lives < 1) {
-            // TODO
+            breakout_reset(breakout);
         }
     }
 
