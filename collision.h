@@ -7,6 +7,8 @@ enum colliding_with {
     COLLIDING_WITH_BALL,
     COLLIDING_WITH_PADDLE,
     COLLIDING_WITH_BRICK,
+    COLLIDING_WITH_TOP_WALL,
+    COLLIDING_WITH_SIDE_WALL,
 };
 
 struct collisions {

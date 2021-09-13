@@ -20,19 +20,19 @@ void ball_spawn(struct ball *ball)
 
 void ball_update(struct ball *ball, float dt)
 {
-    float epsilon = 3.f * dt;
-
-    if (ball->x - epsilon <= 0.f || ball->x + ball->w + epsilon >= BREAKOUT_GAME_WIDTH) {
-        ball->dx *= -1;
-    }
-    if (ball->y - epsilon <= 0.f) {
-        ball->dy *= -1;
-    }
-
     for (int i = 0; i < ball->collisions.size; ++i) {
         enum colliding_with with = ball->collisions.collisions[i];
-        if (with == COLLIDING_WITH_PADDLE || with == COLLIDING_WITH_BRICK) {
+        switch (with) {
+        case COLLIDING_WITH_PADDLE:
+        case COLLIDING_WITH_BRICK:
+        case COLLIDING_WITH_TOP_WALL:
             ball->dy *= -1;
+            break;
+        case COLLIDING_WITH_SIDE_WALL:
+            ball->dx *= -1;
+            break;
+        default:
+            break;
         }
         collisions_remove(&ball->collisions, i);
     }

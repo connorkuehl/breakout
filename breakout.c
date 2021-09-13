@@ -240,8 +240,23 @@ static void ball_and_bricks(struct breakout *breakout, float dt)
     }
 }
 
+static void ball_and_walls(struct ball *ball, float dt)
+{
+    float epsilon = 3.f * dt;
+
+    if (ball->x - epsilon <= 0.f
+            || ball->x + ball->w + epsilon >= BREAKOUT_GAME_WIDTH) {
+        collisions_add(&ball->collisions, COLLIDING_WITH_SIDE_WALL);
+    }
+    if (ball->y - epsilon <= 0.f) {
+        collisions_add(&ball->collisions, COLLIDING_WITH_TOP_WALL);
+    }
+
+}
+
 static void collision_system(struct breakout *breakout, float dt)
 {
     ball_and_player(&breakout->player, &breakout->ball, dt);
     ball_and_bricks(breakout, dt);
+    ball_and_walls(&breakout->ball, dt);
 }
