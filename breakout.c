@@ -11,6 +11,9 @@ static void collision_system(struct breakout *breakout, float dt);
 
 void breakout_reset(struct breakout *breakout)
 {
+    free(breakout->bricks);
+    breakout->bricks = NULL;
+
     breakout->lives = LIVES;
     breakout->score = 0;
 
@@ -34,8 +37,6 @@ void breakout_reset(struct breakout *breakout)
     breakout->n_bricks = n_bricks;
     assert(breakout->n_bricks > 0);
 
-    free(breakout->bricks);
-    breakout->bricks = NULL;
     // TODO: need to be able to fail here
     breakout->bricks = calloc(n_bricks, sizeof(breakout->bricks[0]));
     assert(breakout->bricks);
