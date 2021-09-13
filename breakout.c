@@ -3,10 +3,6 @@
 
 #include "breakout.h"
 
-char *const BREAKOUT_GAME_TITLE = "breakout";
-int const BREAKOUT_GAME_WIDTH   = 480;
-int const BREAKOUT_GAME_HEIGHT  = 640;
-
 static void collision_system(struct breakout *breakout, float dt);
 
 void breakout_reset(struct breakout *breakout)

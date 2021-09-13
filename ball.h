@@ -3,7 +3,7 @@
 
 #include <SDL_render.h>
 
-extern float const BALL_SPEED;
+#define BALL_SPEED 200.f
 
 struct ball {
     float x;

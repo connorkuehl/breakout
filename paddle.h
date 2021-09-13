@@ -3,7 +3,7 @@
 
 #include <SDL_render.h>
 
-extern float const PADDLE_SPEED;
+#define PADDLE_SPEED 250.f
 
 enum paddle_direction {
     PADDLE_DIRECTION_NONE,

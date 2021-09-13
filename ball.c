@@ -2,8 +2,6 @@
 
 #include "ball.h"
 
-float const BALL_SPEED = 200.f;
-
 void ball_spawn(struct ball *ball)
 {
     float margins = BREAKOUT_GAME_WIDTH * 0.13f;

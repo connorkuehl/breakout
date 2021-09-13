@@ -2,8 +2,6 @@
 
 #include "paddle.h"
 
-float const PADDLE_SPEED = 250.f;
-
 void paddle_update(struct paddle *paddle, float dt)
 {
     int x_dir = 0;

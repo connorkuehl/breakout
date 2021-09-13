@@ -13,9 +13,9 @@
 #define LIVES 3
 #define POINTS_PER_BRICK 10
 
-extern char *const BREAKOUT_GAME_TITLE;
-extern int const BREAKOUT_GAME_WIDTH;
-extern int const BREAKOUT_GAME_HEIGHT;
+#define BREAKOUT_GAME_TITLE "breakout"
+#define BREAKOUT_GAME_WIDTH 480
+#define BREAKOUT_GAME_HEIGHT 640
 
 struct breakout {
     struct paddle player;
