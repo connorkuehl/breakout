@@ -54,7 +54,11 @@ int main(int argc, char *argv[])
         goto free_renderer;
     }
 
-    struct breakout game = {};
+    struct breakout game = {
+        .assets = {
+            .font = font,
+        },
+    };
     breakout_reset(&game);
 
     bool should_quit = false;

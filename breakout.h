@@ -3,10 +3,14 @@
 
 #include <SDL_events.h>
 #include <SDL_render.h>
+#include <SDL_ttf.h>
+
 
 #include "ball.h"
 #include "brick.h"
 #include "paddle.h"
+
+#define LIVES 3
 
 extern char *const BREAKOUT_GAME_TITLE;
 extern int const BREAKOUT_GAME_WIDTH;
@@ -17,6 +21,11 @@ struct breakout {
     struct ball ball;
     struct brick *bricks;
     int n_bricks;
+    int lives;
+
+    struct {
+        TTF_Font *font;
+    } assets;
 };
 
 void breakout_cleanup(struct breakout *breakout);

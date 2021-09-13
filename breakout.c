@@ -11,6 +11,8 @@ static void collision_system(struct breakout *breakout, float dt);
 
 void breakout_reset(struct breakout *breakout)
 {
+    breakout->lives = LIVES;
+
     struct paddle *player = &breakout->player;
     player->w = 96;
     player->h = 16;
@@ -89,6 +91,15 @@ void breakout_update(struct breakout *breakout, float dt)
     paddle_update(&breakout->player, dt);
     ball_update(&breakout->ball, dt);
 
+    struct ball *ball = &breakout->ball;
+    if (ball->y + (ball->h / 2) >= BREAKOUT_GAME_HEIGHT) {
+        --breakout->lives;
+        ball_spawn(ball);
+        if (breakout->lives < 1) {
+            // TODO
+        }
+    }
+
     collision_system(breakout, dt);
 }
 
@@ -103,6 +114,35 @@ void breakout_draw(struct breakout *breakout, SDL_Renderer *renderer)
 
     paddle_draw(&breakout->player, renderer);
     ball_draw(&breakout->ball, renderer);
+
+    char lives[32] = {};
+    snprintf(lives, sizeof(lives), "lives: %d", breakout->lives);
+    SDL_Surface *lives_surface = TTF_RenderText_Solid(breakout->assets.font, lives, ((SDL_Color) { 0xff, 0xff, 0xff, 0xff }));
+    if (!lives_surface) {
+        fprintf(stderr, "TTF_RenderText_Solid: %s\n", TTF_GetError());
+        goto done;
+    }
+
+    SDL_Texture *lives_tex = SDL_CreateTextureFromSurface(renderer, lives_surface);
+    if (!lives_tex) {
+        SDL_FreeSurface(lives_surface);
+        fprintf(stderr, "SDL_CreateTextureFromSurface: %s\n", TTF_GetError());
+        goto done;
+    }
+
+    SDL_Rect lives_rect = {
+        .w = lives_surface->w,
+        .h = lives_surface->h,
+        .x = BREAKOUT_GAME_WIDTH - lives_surface->w - 15,
+        .y = 5,
+    };
+    SDL_FreeSurface(lives_surface);
+
+    SDL_RenderCopy(renderer, lives_tex, NULL, &lives_rect);
+    SDL_DestroyTexture(lives_tex);
+
+done:
+    return;
 }
 
 void breakout_cleanup(struct breakout *breakout)
