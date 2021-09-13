@@ -92,7 +92,9 @@ void breakout_update(struct breakout *breakout, float dt)
     ball_update(&breakout->ball, dt);
 
     struct ball *ball = &breakout->ball;
-    if (ball->y + (ball->h / 2) >= BREAKOUT_GAME_HEIGHT) {
+    if (ball->y + ball->h >= BREAKOUT_GAME_HEIGHT
+            || ball->x + ball->w < 0
+            || ball->x >= BREAKOUT_GAME_WIDTH) {
         --breakout->lives;
         ball_spawn(ball);
         if (breakout->lives < 1) {
