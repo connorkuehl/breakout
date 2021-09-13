@@ -130,6 +130,10 @@ static void ball_and_player(struct paddle *player, struct ball *ball, float dt)
 
     if (SDL_HasIntersection(&b, &p)) {
         ball->dy *= -1;
+
+        if (ball->y + (ball->h / 2) >= player->y + (player->h / 2)) {
+            ball->dx *= -1;
+        }
     }
 }
 
