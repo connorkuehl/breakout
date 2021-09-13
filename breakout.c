@@ -1,6 +1,8 @@
 #include <assert.h>
 #include <time.h>
 
+#include "collision.h"
+
 #include "breakout.h"
 
 static void collision_system(struct breakout *breakout, float dt);
@@ -95,6 +97,18 @@ void breakout_update(struct breakout *breakout, float dt)
         ball_spawn(ball);
         if (breakout->lives < 1) {
             breakout_reset(breakout);
+        }
+    }
+
+    for (int i = 0; i < breakout->n_bricks; ++i) {
+        struct brick *brick = &breakout->bricks[i];
+
+        brick_update(brick, dt);
+
+        if (brick->health < 1) {
+            --breakout->n_bricks;
+            *brick = breakout->bricks[breakout->n_bricks];
+            breakout->score += POINTS_PER_BRICK;
         }
     }
 
@@ -194,11 +208,7 @@ static void ball_and_player(struct paddle *player, struct ball *ball, float dt)
     };
 
     if (SDL_HasIntersection(&b, &p)) {
-        ball->dy *= -1;
-
-        if (ball->y + (ball->h / 2) >= player->y + (player->h / 2)) {
-            ball->dx *= -1;
-        }
+        collisions_add(&ball->collisions, COLLIDING_WITH_PADDLE);
     }
 }
 
@@ -222,14 +232,8 @@ static void ball_and_bricks(struct breakout *breakout, float dt)
         };
 
         if (SDL_HasIntersection(&b, &brk)) {
-            ball->dy *= -1;
-
-            --brick->health;
-            if (brick->health < 1) {
-                --breakout->n_bricks;
-                *brick = breakout->bricks[breakout->n_bricks];
-                breakout->score += POINTS_PER_BRICK;
-            }
+            collisions_add(&brick->collisions, COLLIDING_WITH_BALL);
+            collisions_add(&ball->collisions, COLLIDING_WITH_BRICK);
         }
     }
 }

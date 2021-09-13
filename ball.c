@@ -29,6 +29,14 @@ void ball_update(struct ball *ball, float dt)
         ball->dy *= -1;
     }
 
+    for (int i = 0; i < ball->collisions.size; ++i) {
+        enum colliding_with with = ball->collisions.collisions[i];
+        if (with == COLLIDING_WITH_PADDLE || with == COLLIDING_WITH_BRICK) {
+            ball->dy *= -1;
+        }
+        collisions_remove(&ball->collisions, i);
+    }
+
     ball->x += (BALL_SPEED * ball->dx * dt);
     ball->y += (BALL_SPEED * ball->dy * dt);
 }

@@ -3,6 +3,8 @@
 
 #include <SDL_render.h>
 
+#include "collision.h"
+
 #define BRICK_WIDTH  46
 #define BRICK_HEIGHT 12
 #define BRICK_GAP    5
@@ -14,8 +16,10 @@ struct brick {
     float w;
     float h;
     int health;
+    struct collisions collisions;
 };
 
+void brick_update(struct brick *brick, float dt);
 void brick_draw(struct brick *brick, SDL_Renderer *renderer);
 
 #endif

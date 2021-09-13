@@ -3,6 +3,8 @@
 
 #include <SDL_render.h>
 
+#include "collision.h"
+
 #define BALL_SPEED 200.f
 
 struct ball {
@@ -12,6 +14,7 @@ struct ball {
     int dy;
     int w;
     int h;
+    struct collisions collisions;
 };
 
 void ball_spawn(struct ball *ball);

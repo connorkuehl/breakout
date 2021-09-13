@@ -3,6 +3,8 @@
 
 #include <SDL_render.h>
 
+#include "collision.h"
+
 #define PADDLE_SPEED 250.f
 
 enum paddle_direction {
