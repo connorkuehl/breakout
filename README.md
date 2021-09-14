@@ -19,3 +19,8 @@ Pre-requisites:
 3. `meson setup builddir`
 4. `ninja -C builddir`
 5. `./builddir/breakout`
+
+## Controls
+
+The left arrow key moves the paddle to the left and the right arrow key
+moves the paddle to the right.
